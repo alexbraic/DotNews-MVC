@@ -1,11 +1,24 @@
 using DotNews.Data;
+using DotNews.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
+
+// ----------------------------------------------------------------------------
+builder.Services.AddHttpClient<ReportsService>();
+// ----------------------------------------------------------------------------
+
+
+
+
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();

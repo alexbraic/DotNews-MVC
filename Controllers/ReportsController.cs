@@ -8,23 +8,42 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DotNews.Data;
 using DotNews.Models;
+using DotNews.Services;
 
 namespace DotNews.Controllers
 {
     public class ReportsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        //api
+        private readonly ReportsService _reportsService;
 
-        public ReportsController(ApplicationDbContext context)
+
+        public ReportsController(ApplicationDbContext context, ReportsService reportsService /*(api)*/)
         {
             _context = context;
+
+            //api
+            _reportsService = reportsService;
         }
 
-        // GET: News Feed
+        //new methods
+        //-------------------------------------------------------------
+        // gets the API data
+        public async Task<IActionResult> ApiIndex()
+        {
+            //api
+            return View(await _reportsService.GetReportList());
+        }
+
+
+        // GET: News Feed from the MVC
         public async Task<IActionResult> Feed()
         {
             return View(await _context.Report.ToListAsync());
         }
+        //-------------------------------------------------------------
+
 
         // GET: Reports
         public async Task<IActionResult> Index()
