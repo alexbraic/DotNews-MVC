@@ -19,5 +19,10 @@ namespace DotNews.Services
         {
             return await Client.GetFromJsonAsync<IEnumerable<Report>>("/api/Reports");
         }
+
+        public async Task<IEnumerable<Report>> GetReport(int id)
+        {
+            return (IEnumerable<Report>)await Client.GetFromJsonAsync<Report>($"/api/Reports/{id}");
+        }
     }
 }

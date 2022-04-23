@@ -6,12 +6,11 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 
-
+//API Services
 // ----------------------------------------------------------------------------
 builder.Services.AddHttpClient<ReportsService>();
+builder.Services.AddHttpClient<CommentsService>();
 // ----------------------------------------------------------------------------
-
-
 
 
 // Add services to the container.

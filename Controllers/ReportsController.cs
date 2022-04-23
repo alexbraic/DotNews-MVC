@@ -19,7 +19,7 @@ namespace DotNews.Controllers
         private readonly ReportsService _reportsService;
 
 
-        public ReportsController(ApplicationDbContext context, ReportsService reportsService /*(api)*/)
+        public ReportsController(ApplicationDbContext context, ReportsService reportsService /*(<- api)*/)
         {
             _context = context;
 
@@ -27,22 +27,31 @@ namespace DotNews.Controllers
             _reportsService = reportsService;
         }
 
-        //new methods
-        //-------------------------------------------------------------
-        // gets the API data
+
+        //new methods---------------------------------------------------
+        // GET: Reports - gets the API data
         public async Task<IActionResult> ApiIndex()
         {
             //api
             return View(await _reportsService.GetReportList());
         }
 
-
-        // GET: News Feed from the MVC
+        // GET: Reports - from the MVC DB, for the DotNews page (Feed View)
         public async Task<IActionResult> Feed()
         {
             return View(await _context.Report.ToListAsync());
         }
-        //-------------------------------------------------------------
+
+        // not working at the moment
+        public async Task<IActionResult> ReportIndexId(int id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            return View(await _reportsService.GetReport(id)); ;            
+        }
+        //new methods---------------------------------------------------
 
 
         // GET: Reports

@@ -7,17 +7,34 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DotNews.Data;
+using DotNews.Services;
 
 namespace DotNews.Controllers
 {
     public class CommentsController : Controller
     {
         private readonly ApplicationDbContext _context;
-
-        public CommentsController(ApplicationDbContext context)
+        //api
+        private readonly CommentsService _commentsService; 
+        public CommentsController(ApplicationDbContext context, CommentsService commentsService /*(<- api)*/)
         {
             _context = context;
+
+            //api
+            _commentsService = commentsService; 
         }
+
+        //new method---------------------------------------------------
+        // GET: Reports - gets the API data
+        public async Task<IActionResult> ApiIndex()
+        {
+            //api
+            return View(await _commentsService.GetCommentList());
+        }
+        //new method---------------------------------------------------
+
+
+
 
         // GET: Comments
         public async Task<IActionResult> Index()
