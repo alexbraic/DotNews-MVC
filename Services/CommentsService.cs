@@ -7,7 +7,7 @@ namespace DotNews.Services
         public HttpClient Client { get; set; }
         public CommentsService(HttpClient client)
         {
-            client.BaseAddress = new Uri("https://localhost:7082/");
+            client.BaseAddress = new Uri("https://localhost:7209/");
 
             client.DefaultRequestHeaders.Add("Accept", "application/json");
 
