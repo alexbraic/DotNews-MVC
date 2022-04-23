@@ -4,88 +4,19 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>News Feed</h1>
-
-@foreach (var item in Model) {
-    <li>
-        <ul>
-            @Html.DisplayFor(modelItem => item.Title)
-        </ul>
-        <ul>
-            @Html.DisplayFor(modelItem => item.Description)
-        </ul>
-        <ul>
-            @Html.DisplayFor(modelItem => item.Body)
-        </ul>
-        <ul>
-            @Html.DisplayFor(modelItem => item.CreatedBy)
-        </ul>
-        <ul>
-            @Html.DisplayFor(modelItem => item.CreatedDate)
-        </ul>
-        <ul>
-            @Html.DisplayFor(modelItem => item.LastUpdatedDate)
-        </ul>
-        <ul>
-            @Html.DisplayFor(modelItem => item.Category)
-        </ul>
-        <hr />
-    </li>
-}
+<h1 style="margin-left: auto; margin-right: auto; text-align: center;">News Feed</h1>
+<br />
+<hr />
 <br />
 
-@*<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Body)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatedBy)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatedDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LastUpdatedDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Category)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Body)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedBy)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastUpdatedDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category)
-            </td>
-        </tr>
+@foreach (var item in Model)
+{
+    <h2 style="margin-left: auto; margin-right: auto; text-align: center;">@Html.DisplayFor(modelItem => item.Title)</h2>
+    <h4 style="margin-left: auto; margin-right: auto; text-align: center;">@Html.DisplayFor(modelItem => item.Description)</h4>
+    <p style="margin-left: auto; margin-right: auto; text-align: justify;">@Html.DisplayFor(modelItem => item.Body)</p>
+    <p style="text-align: right;">@Html.DisplayFor(modelItem => item.CreatedBy)</p>
+    <p style="text-align: right;">@Html.DisplayFor(modelItem => item.CreatedDate)</p>
+    <p style="text-align: right;">@Html.DisplayFor(modelItem => item.LastUpdatedDate)</p>
+    <hr />
 }
-    </tbody>
-</table>*@
+
