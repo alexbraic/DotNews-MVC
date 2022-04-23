@@ -1,32 +1,59 @@
 ﻿using DotNews.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using DotNews.Data;
 
 namespace DotNews.Controllers
+
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly ApplicationDbContext _context;
+        public HomeController(ApplicationDbContext context)
         {
-            _logger = logger;
+            _context = context;
+        }
+        public async Task<IActionResult> Index(string sortOrder, string searchString)
+        {
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+            ViewData["CurrentFilter"] = searchString;
+            var report = from s in _context.Report
+                         select s;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                report = report.Where(s => s.Id.ToString().Contains(searchString)
+                                    || s.Category.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    report = report.OrderByDescending(s => s.Title);
+                    break;
+                case "Date":
+                    report = report.OrderBy(s => s.Category);
+                    break;
+                case "date_desc":
+                    report = report.OrderByDescending(s => s.Category);
+                    break;
+                default:
+                    report = report.OrderBy(s => s.Title);
+                    break;
+            }
+
+            return View(await report.AsNoTracking().ToListAsync());
         }
 
-        public IActionResult Index()
+        private bool ReportsExists(int id)
         {
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return _context.Report.Any(e => e.Id == id);
         }
     }
 }
