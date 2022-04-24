@@ -39,10 +39,13 @@
                 <a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]">@Html.DisplayNameFor(model => model.CreatedDate)</a>
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.LastUpdatedDate)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Category)
             </th>
             <th></th>
-        </tr>
+        </tr>   
     </thead>
     <tbody>
 @foreach (var item in Model) {

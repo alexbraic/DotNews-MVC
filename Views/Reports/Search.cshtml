@@ -13,7 +13,7 @@
 <form asp-controller="Reports" asp-action="Search" method="get">
     <div class="form-actions no-color">
         <p>
-            Find by User Id or Category: <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
+            Find by Report Id or Category: <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
             <input type="submit" value="Search" class="btn btn-default" /> |
             <a asp-controller="Reports" asp-action="Index">Back to Full List</a>
         </p>

@@ -70,7 +70,6 @@ namespace DotNews.Controllers
             // Get the comments to show in the Details page ------------------------------------
             var reportComments = new ReportComments();
             var comments = await _context.Comment.ToListAsync();
-            //.FirstOrDefaultAsync(m => m.reportId == id);
 
             reportComments.Report = (Report)report;
             reportComments.Comments = comments;
@@ -79,7 +78,7 @@ namespace DotNews.Controllers
         }
 
 
-        public IActionResult Privacy()
+        public IActionResult Team()
         {
             return View();
         }

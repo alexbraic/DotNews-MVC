@@ -24,14 +24,51 @@ namespace DotNews.Controllers
             _commentsService = commentsService; 
         }
 
-        //new method---------------------------------------------------
+        //new methods--------------------------------------------------
         // GET: Reports - gets the API data
         public async Task<IActionResult> ApiIndex()
         {
             //api
             return View(await _commentsService.GetCommentList());
         }
-        //new method---------------------------------------------------
+
+        //search functionality-----------------------------------------
+        public async Task<IActionResult> Search(string sortOrder, string searchString)
+        {
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+            ViewData["CurrentFilter"] = searchString;
+            var comment = from c in _context.Comment
+                          select c;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                comment = comment.Where(c => c.reportId.ToString().Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    comment = comment.OrderByDescending(c => c.reportId);
+                    break;
+                case "Date":
+                    comment = comment.OrderBy(c => c.dateCreated);
+                    break;
+                case "date_desc":
+                    comment = comment.OrderByDescending(c => c.dateCreated);
+                    break;
+                default:
+                    comment = comment.OrderBy(c => c.reportId);
+                    break;
+            }
+            return View(await comment.AsNoTracking().ToListAsync());
+        }
+        private bool CommentsExists(int id)
+        {
+            return _context.Comment.Any(e => e.Id == id);
+        }
+
+        //new methods--------------------------------------------------
 
 
 
