@@ -1,1 +1,50 @@
-﻿
+﻿SetupMVC
+
+Creating a Web app
+    Open Visual Studio 2022/Visual Studio Code
+    Create new ASP.NET Core Web App (Model-View-Controller) and select next.
+    Give the project a name and save location (Store the project solution and files in the same folder location).
+    Select the .NET 6.0 framework.
+    Select Create.
+
+    Add a Model
+        Right-Click on the models folder > Add > Class and name choose a name for the model. In this case it is Comment.cs
+        Add NuGet packages: Select the tools menu > NuGet Package Manager > Package Manager Console.
+        From here run the following:
+            Install-Package Microsoft.EntityFrameworkCore.Design
+            Install-Package Microsoft.EntityFrameworkCore.SqlServer
+
+        Add validation to a model
+            The validation attributes specify behaviour that you want to enforce on the models' properties they’re applied to.
+            Go to the Data folder > Report.cs
+                E.g. Define validation attributes for StringLength of the Body object.
+                        [Required]
+                        [MaxLength(5000)]
+                        public string? Body { get; set; }
+
+     Add a controller to the ASP.NET Core MVC app
+        Right click the controllers folder, select Add > New Scaffold Item
+        Select MVC Controller with views, using Entity Framework > Add
+        Select the model just created
+        Select the + icon for adding a new Context, or
+            Select the ApplicationDbContext
+        Use default Controller Name > Add
+
+    The previous step creates a Views folder and adds the default views for the controller.
+
+    For all the changes above to take effect and create the Database, open the PMC (Package Manager Console) and type in the following commands:
+        Add-Migration InitialMigration  # InitialMigration <- your migration's name
+        Update-Database
+    
+    Repeat the process of adding models and controllers for the models to get every table that you require for the database context.
+
+    Add a view
+        Right click a folder from within Views and then Add > New Item.
+        Use the search box (top right) to search for Razor View – Empty
+        Keep the name box value, inde x.cshtml. and select Add.
+ 
+
+Add Search to an ASP.NET Core MVC app
+    The search functionality is found in the controllers and the views. The components work together to give the application this functionality.
+        E.g. In the CommentsController, the logic within the Search() method will add the search functionality that is called upon from the 
+             Index.cshtml view of the Views.Comments folder.

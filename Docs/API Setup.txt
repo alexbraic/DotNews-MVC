@@ -1,0 +1,27 @@
+﻿Setup API
+E.g. CommentsService
+
+Creating a service
+	Open Visual Studio 2022/Visual Studio Code
+	Create new ASP.NET Core Web API and select next.
+	Give the project a name and save location (Store the project solution and files in the same folder location).
+	Select the .NET 6.0 framework.
+	Select Create.
+
+Create Model
+	Right click on the solutions explorer
+	Select Add
+	Select New folder and name it Models
+	Right click on the Models folder and add a new Class and name it Comment.cs
+	Add the required attributes
+
+Database context scaffolding
+	Select Tools > NuGet package manager > Manage NuGet Packages for solution
+	Browse and search for Microsoft.EntityFrameworkCore.Design. Choose your correct version and select install.
+	Right-Click on the controllers folder
+	Select Add > New Scaffold Item
+	Select API Controller with actions, using Entity Framework > select Add
+	Select the model just created
+	Select the + icon for adding a new Context
+	Use default Controller Name
+	Click Next
