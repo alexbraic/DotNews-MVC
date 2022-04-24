@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using DotNews.Data;
+using DotNews.Models;
 
 namespace DotNews.Controllers
 
@@ -48,6 +49,39 @@ namespace DotNews.Controllers
         private bool ReportsExists(int id)
         {
             return _context.Report.Any(e => e.Id == id);
+        }
+
+
+        // GET: Reports/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var report = await _context.Report
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (report == null)
+            {
+                return NotFound();
+            }
+
+            // Get the comments to show in the Details page ------------------------------------
+            var reportComments = new ReportComments();
+            var comments = await _context.Comment.ToListAsync();
+            //.FirstOrDefaultAsync(m => m.reportId == id);
+
+            reportComments.Report = (Report)report;
+            reportComments.Comments = comments;
+
+            return View(reportComments);
+        }
+
+
+        public IActionResult Privacy()
+        {
+            return View();
         }
     }
 }

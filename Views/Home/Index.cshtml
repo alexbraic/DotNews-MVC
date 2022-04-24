@@ -69,9 +69,9 @@
                 @Html.DisplayFor(modelItem => item.Category)
             </td>
             <td>
-                <a asp-controller="Reports" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                <a asp-controller="Reports" asp-action="Details" asp-route-id="@item.Id">Details</a>
-                <a asp-controller="Reports" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                @*<a asp-controller="Reports" asp-action="Edit" asp-route-id="@item.Id">Edit</a>*@
+                <a asp-controller="Home" asp-action="Details" asp-route-id="@item.Id">Details</a>
+                @*<a asp-controller="Reports" asp-action="Delete" asp-route-id="@item.Id">Delete</a>*@
             </td>
         </tr>
         }
