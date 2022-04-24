@@ -29,13 +29,13 @@
                 <span asp-validation-for="Body" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CreatedBy" class="control-label"></label>
-                <input asp-for="CreatedBy" class="form-control" />
+                <label asp-for="CreatedBy" class="control-label" hidden></label>
+                <input asp-for="CreatedBy" class="form-control" readonly hidden/>
                 <span asp-validation-for="CreatedBy" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CreatedDate" class="control-label"></label>
-                <input asp-for="CreatedDate" class="form-control" />
+                <label asp-for="CreatedDate" class="control-label" hidden></label>
+                <input asp-for="CreatedDate" class="form-control" readonly hidden/>
                 <span asp-validation-for="CreatedDate" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -44,10 +44,11 @@
                 <span asp-validation-for="LastUpdatedDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Category" class="control-label"></label>
-                <input asp-for="Category" class="form-control" />
+                <label asp-for="Category" class="control-label" hidden></label>
+                <input asp-for="Category" class="form-control" readonly hidden/>
                 <span asp-validation-for="Category" class="text-danger"></span>
             </div>
+            <br />
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>

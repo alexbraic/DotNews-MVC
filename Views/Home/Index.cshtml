@@ -1,12 +1,11 @@
 ﻿@model IEnumerable<DotNews.Data.Report>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Search";
 }
 
-<h1>Home Page</h1>
-<h2>Search Reports</h2>
- 
+<h1>Search Reports</h1>
+<br />
 <form asp-action="Index" method="get">
     <div class="form-actions no-color">
         <p>
@@ -24,6 +23,9 @@
 <table class="table">
  <thead>
         <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
             <th>
                 <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]">@Html.DisplayNameFor(model => model.Title)</a>
             </th>
@@ -45,6 +47,9 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
