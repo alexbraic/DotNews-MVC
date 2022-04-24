@@ -65,7 +65,11 @@
     <ul>
         @foreach(var c in Model.Comments)
         {
-            <li>@Html.DisplayFor(modelItem => c.commentBody)</li>
+            var comm = Model.Report.Id;
+            if(c.reportId == comm)
+            {
+                <li>@Html.DisplayFor(modelItem => c.commentBody)</li>
+            }
         }
     </ul>
 </div>

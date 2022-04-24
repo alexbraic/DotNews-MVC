@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using DotNews.Data;
 using DotNews.Models;
 using DotNews.Services;
+using Microsoft.IdentityModel;
 
 namespace DotNews.Controllers
 {
@@ -42,15 +43,6 @@ namespace DotNews.Controllers
             return View(await _context.Report.ToListAsync());
         }
 
-        // not working at the moment
-        public async Task<IActionResult> ReportIndexId(int id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-            return View(await _reportsService.GetReport(id)); ;            
-        }
         //new methods---------------------------------------------------
 
 
@@ -75,9 +67,10 @@ namespace DotNews.Controllers
                 return NotFound();
             }
 
-            // ---------------------------------------------
+            // Get the comments to show in the Details page ------------------------------------
             var reportComments = new ReportComments();
             var comments = await _context.Comment.ToListAsync();
+                //.FirstOrDefaultAsync(m => m.reportId == id);
 
             reportComments.Report = (Report)report;
             reportComments.Comments = comments;
